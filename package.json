@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com/RallySoftware/grunt-nexus-artifact"
+    "url": "git@github.com/forkhome/grunt-nexus-artifact"
   },
   "keywords": [
     "grunt",

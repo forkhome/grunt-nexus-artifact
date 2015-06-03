@@ -7,14 +7,14 @@ module.exports = (grunt) -> class NexusArtifact
   @fromString = (idString) ->
     config = {}
 
-    [config.group_id, config.name, config.ext, config.version] = idString.split(':')
+    [config.group_id, config.name, config.ext, config.version, config.classifer] = idString.split(':')
     return config
 
   constructor: (config) ->
-    {@url, @base_path, @repository, @group_id, @name, @version, @ext, @versionPattern} = config
+    {@url, @base_path, @repository, @group_id, @name, @version, @ext, @classifer, @versionPattern} = config
 
   toString: () ->
-    [@group_id, @name, @ext, @version].join(':')
+    [@group_id, @name, @ext, @version, @classifer].join(':')
 
   buildUrlPath: () ->
     _.compact(_.flatten([
@@ -30,5 +30,5 @@ module.exports = (grunt) -> class NexusArtifact
     "#{@buildUrlPath()}#{@buildArtifactUri()}"
 
   buildArtifactUri: () ->
-    @versionPattern.replace /%([ave])/g, ($0, $1) =>
-      { a: @name, v: @version, e: @ext}[$1]
+    @versionPattern.replace /%([avce])/g, ($0, $1) =>
+      { a: @name, v: @version, c: @classifer, e: @ext}[$1]

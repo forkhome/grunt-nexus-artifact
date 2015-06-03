@@ -16,7 +16,7 @@ module.exports = (grunt) ->
       url: ''
       base_path: 'nexus/content/repositories'
       repository: ''
-      versionPattern: '%a-%v.%e'
+      versionPattern: '%a-%v-%c.%e'
       username: ''
       password: ''
       curl: false

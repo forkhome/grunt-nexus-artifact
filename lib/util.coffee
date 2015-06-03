@@ -28,33 +28,33 @@ module.exports = (grunt) ->
         deferred.reject err
         return
 
-      spawnCmd = {}
+      # spawnCmd = {}
 
-      if artifact.ext is 'tgz'
-        spawnCmd =
-          cmd: 'tar'
-          args: "zxf #{temp_path} -C #{path}".split ' '
-      else if artifact.ext in [ 'zip', 'jar' ]
-        spawnCmd =
-          cmd : 'unzip',
-          args: "#{temp_path} -d #{path}".split(' ')
-      else
-        msg = "Unknown artifact extension (#{artifact.ext}), could not extract it"
-        deferred.reject msg
+      # if artifact.ext is 'tgz'
+      #   spawnCmd =
+      #     cmd: 'tar'
+      #     args: "zxf #{temp_path} -C #{path}".split ' '
+      # else if artifact.ext in [ 'zip', 'jar' ]
+      #   spawnCmd =
+      #     cmd : 'unzip',
+      #     args: "#{temp_path} -d #{path}".split(' ')
+      # else
+      #   msg = "Unknown artifact extension (#{artifact.ext}), could not extract it"
+      #   deferred.reject msg
 
-      grunt.util.spawn spawnCmd, (err, stdout, stderr) ->
-        grunt.file.delete temp_path
+      # grunt.util.spawn spawnCmd, (err, stdout, stderr) ->
+      #   grunt.file.delete temp_path
 
-        if err
-          deferred.reject err
-          return
+      #   if err
+      #     deferred.reject err
+      #     return
 
-        filePath = "#{path}/.downloadedArtifacts"
-        downloadedArtifacts = if grunt.file.exists(filePath) then grunt.file.readJSON(filePath) else {}
-        downloadedArtifacts[artifact.toString()] = new Date()
-        grunt.file.write filePath, JSON.stringify(downloadedArtifacts)
+      #   filePath = "#{path}/.downloadedArtifacts"
+      #   downloadedArtifacts = if grunt.file.exists(filePath) then grunt.file.readJSON(filePath) else {}
+      #   downloadedArtifacts[artifact.toString()] = new Date()
+      #   grunt.file.write filePath, JSON.stringify(downloadedArtifacts)
 
-        deferred.resolve()
+      #   deferred.resolve()
 
     deferred.promise
 
